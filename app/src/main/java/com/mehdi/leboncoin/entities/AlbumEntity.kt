@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName
 class AlbumEntity {
     @field:SerializedName("albumId")
     @ColumnInfo(name = "albumId") var albumId: Int? = null
+    @PrimaryKey
     @field:SerializedName("id")
     @ColumnInfo(name = "id") var id: Int? = null
     @field:SerializedName("title")
