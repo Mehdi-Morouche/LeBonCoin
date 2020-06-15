@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivityViewModel(application: Application) : AndroidViewModel(application),
     LifecycleObserver {
 
-   private val repository: AlbumRepository
+    private val repository: AlbumRepository
 
     var TAG = "MainActivityViewModel"
 
