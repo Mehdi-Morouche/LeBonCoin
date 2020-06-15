@@ -7,12 +7,11 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.mehdi.leboncoin.api.AlbumService
 import com.mehdi.leboncoin.db.AlbumDatabase
 import com.mehdi.leboncoin.entities.AlbumEntity
 import com.mehdi.leboncoin.repository.AlbumRepository
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,8 +84,8 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         @JvmStatic
         @BindingAdapter("app:load_image")
         fun setImageUrl(view: ImageView, imageUrl: String?) {
-            Glide.with(view.context)
-                .load(imageUrl).apply(RequestOptions().circleCrop().fitCenter())
+            Picasso.get()
+                .load(imageUrl)
                 .into(view)
         }
     }
