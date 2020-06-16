@@ -2,15 +2,14 @@ package com.mehdi.leboncoin.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.mehdi.leboncoin.BR
 import com.mehdi.leboncoin.R
 import com.mehdi.leboncoin.databinding.ItemHolderBinding
 import com.mehdi.leboncoin.entities.AlbumEntity
+import kotlinx.android.synthetic.main.item_holder.view.*
 
 /**
  * Created by mehdi on 2020-06-15.
@@ -19,6 +18,10 @@ import com.mehdi.leboncoin.entities.AlbumEntity
 class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     private var albums = listOf<AlbumEntity>()
+
+    private var albumsSize = mutableListOf<String>()
+
+    private var cpt = 0
 
     private lateinit var context: Context
 
@@ -41,6 +44,20 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
     fun setData(dataList: List<AlbumEntity>) {
         albums = emptyList()
         albums = dataList
+
+        cpt = 0
+
+        for (album in albums) {
+            if (albumsSize.size == 0) {
+                albumsSize.add(album.albumId.toString())
+            }
+
+            if (!album.albumId.toString().equals(albumsSize.get(cpt))) {
+                albumsSize.add(album.albumId.toString())
+                cpt++
+            }
+        }
+
         notifyDataSetChanged()
     }
 
@@ -59,26 +76,23 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return albums.size
+        return albumsSize.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(albums[position])
+        holder.bind(albumsSize[position])
 
-        val item = albums[position]
+        val item = albumsSize[position]
         with(holder.itemView) {
             tag = item
             //setOnClickListener(onClickListener)
         }
     }
 
-    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(dataObject: AlbumEntity) {
-            with(binding) {
-                setVariable(BR.album, dataObject)
-                executePendingBindings()
-            }
+        fun bind(dataObject: String) {
+            itemView.album.text = dataObject
         }
     }
 }
