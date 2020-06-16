@@ -17,4 +17,9 @@ class AlbumRepository(private val albumDao: AlbumDao) {
     suspend fun insertAll(album: List<AlbumEntity>) {
         albumDao.insertAll(album)
     }
+
+    fun getAlbumsById(albumId : Int) : LiveData<List<AlbumEntity>> {
+        return albumDao.getAlbumsById(albumId)
+    }
+
 }

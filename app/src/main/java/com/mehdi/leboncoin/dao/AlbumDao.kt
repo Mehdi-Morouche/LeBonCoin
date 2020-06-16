@@ -17,6 +17,9 @@ interface AlbumDao {
     @Query("SELECT * from album")
     fun getAlbums(): LiveData<List<AlbumEntity>>
 
+    @Query("SELECT * from album WHERE albumId = :albumId")
+    fun getAlbumsById(albumId : Int): LiveData<List<AlbumEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(albums: List<AlbumEntity>)
 

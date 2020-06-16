@@ -2,6 +2,9 @@ package com.mehdi.leboncoin.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,22 +12,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.mehdi.leboncoin.AlbumDetailActivity
+import com.mehdi.leboncoin.BR
 import com.mehdi.leboncoin.R
 import com.mehdi.leboncoin.databinding.ItemHolderBinding
 import com.mehdi.leboncoin.entities.AlbumEntity
 import kotlinx.android.synthetic.main.item_holder.view.*
 
 /**
- * Created by mehdi on 2020-06-15.
+ * Created by mehdi on 2020-06-16.
  */
 
-class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     private var albums = listOf<AlbumEntity>()
-
-    private var albumsSize = mutableListOf<String>()
-
-    private var cpt = 0
 
     private lateinit var context: Context
 
@@ -43,20 +43,6 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
     fun setData(dataList: List<AlbumEntity>) {
         albums = emptyList()
         albums = dataList
-        albumsSize.clear()
-
-        cpt = 0
-
-        for (album in albums) {
-            if (albumsSize.size == 0) {
-                albumsSize.add(album.albumId.toString())
-            }
-
-            if (!album.albumId.toString().equals(albumsSize.get(cpt))) {
-                albumsSize.add(album.albumId.toString())
-                cpt++
-            }
-        }
 
         notifyDataSetChanged()
     }
@@ -65,7 +51,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         var binding: ViewDataBinding? = DataBindingUtil.inflate<ItemHolderBinding>(
             inflater,
-            R.layout.item_holder,
+            R.layout.album_holder,
             parent,
             false
         )
@@ -76,23 +62,26 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return albumsSize.size
+        return albums.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(albumsSize[position])
+        holder.bind(albums[position])
 
-        val item = albumsSize[position]
+        val item = albums[position]
         with(holder.itemView) {
             tag = item
             setOnClickListener(onClickListener)
         }
     }
 
-    class ViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(dataObject: String) {
-            itemView.album.text = dataObject
+        fun bind(dataObject: AlbumEntity) {
+            with(binding) {
+                setVariable(BR.album, dataObject)
+                executePendingBindings()
+            }
         }
     }
 }
