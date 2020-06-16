@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".AlbumDetailActivity" />
+        <activity android:name=".AlbumItemActivity" />
     </application>
 
 </manifest>

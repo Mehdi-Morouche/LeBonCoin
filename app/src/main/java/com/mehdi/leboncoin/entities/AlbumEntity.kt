@@ -2,11 +2,13 @@ package com.mehdi.leboncoin.entities
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 /**
  * Created by mehdi on 2020-06-15.
  */
 
+@Serializable
 @Entity(tableName = "album")
 class AlbumEntity {
     @field:SerializedName("albumId")

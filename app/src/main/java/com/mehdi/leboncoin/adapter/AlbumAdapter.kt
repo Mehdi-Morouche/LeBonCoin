@@ -12,11 +12,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.mehdi.leboncoin.AlbumDetailActivity
+import com.mehdi.leboncoin.AlbumItemActivity
 import com.mehdi.leboncoin.BR
 import com.mehdi.leboncoin.R
 import com.mehdi.leboncoin.databinding.ItemHolderBinding
 import com.mehdi.leboncoin.entities.AlbumEntity
 import kotlinx.android.synthetic.main.item_holder.view.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 
 /**
  * Created by mehdi on 2020-06-16.
@@ -32,9 +35,10 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as String
-            val intent = Intent(v.context, AlbumDetailActivity::class.java).apply {
-                putExtra(AlbumDetailActivity.ARG_ALBUM_ID, item)
+            val item = v.tag as AlbumEntity
+            val intent = Intent(v.context, AlbumItemActivity::class.java).apply {
+                val json = Json(JsonConfiguration.Stable)
+                putExtra(AlbumItemActivity.ARG_ALBUM, json.stringify(AlbumEntity.serializer(), item))
             }
             v.context.startActivity(intent)
         }
