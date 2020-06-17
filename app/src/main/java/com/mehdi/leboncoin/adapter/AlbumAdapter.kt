@@ -2,22 +2,17 @@ package com.mehdi.leboncoin.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.mehdi.leboncoin.AlbumDetailActivity
 import com.mehdi.leboncoin.AlbumItemActivity
 import com.mehdi.leboncoin.BR
 import com.mehdi.leboncoin.R
 import com.mehdi.leboncoin.databinding.ItemHolderBinding
 import com.mehdi.leboncoin.entities.AlbumEntity
-import kotlinx.android.synthetic.main.item_holder.view.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 

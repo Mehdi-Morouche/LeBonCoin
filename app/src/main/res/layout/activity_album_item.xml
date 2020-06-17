@@ -11,50 +11,31 @@
             type="com.mehdi.leboncoin.entities.AlbumEntity"/>
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:load_image="@{album.url}" />
+
+        <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@{album.title}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-            <ImageView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_margin="16dp"
-                android:id="@+id/image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:load_image="@{album.thumbnailUrl}" />
-
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image"
-                android:id="@+id/make"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColorHighlight="#F3A"/>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/make"
-                app:layout_constraintStart_toEndOf="@id/image"
-                android:id="@+id/model"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{album.title}"
-                android:textSize="14sp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

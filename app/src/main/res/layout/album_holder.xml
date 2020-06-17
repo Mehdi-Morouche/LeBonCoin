@@ -24,33 +24,27 @@
 
             <ImageView
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_margin="16dp"
                 android:id="@+id/image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:load_image="@{album.thumbnailUrl}" />
 
             <TextView
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image"
-                android:id="@+id/make"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/title"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColorHighlight="#F3A"/>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/make"
-                app:layout_constraintStart_toEndOf="@id/image"
-                android:id="@+id/model"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{album.title}"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="14sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

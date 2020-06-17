@@ -5,10 +5,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
-import com.mehdi.leboncoin.db.AlbumDatabase
-import com.mehdi.leboncoin.entities.AlbumEntity
-import com.mehdi.leboncoin.repository.AlbumRepository
 import com.squareup.picasso.Picasso
 
 /**
@@ -17,19 +13,6 @@ import com.squareup.picasso.Picasso
 
 class AlbumItemActivityViewModel(application: Application) : AndroidViewModel(application),
     LifecycleObserver {
-
-    private val repository: AlbumRepository
-
-    lateinit var albums : LiveData<List<AlbumEntity>>
-
-    init {
-        val albumDao = AlbumDatabase.getDatabase(application).albumDao()
-        repository = AlbumRepository(albumDao)
-    }
-
-    fun getAlbumsById(albumId : Int) {
-        albums = repository.getAlbumsById(albumId)
-    }
 
     companion object{
         @JvmStatic

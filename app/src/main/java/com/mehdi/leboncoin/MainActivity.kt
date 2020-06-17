@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
             setLifecycleOwner(this@MainActivity)
             lifecycle.addObserver(mModel)
         }
+
         dataBinding.recycler?.adapter = adapter
 
         mModel.albums.observe(this, Observer { albums ->
-            //dataBinding.recycler?.adapter = adapter
             adapter.setData(dataList = albums)
         })
     }

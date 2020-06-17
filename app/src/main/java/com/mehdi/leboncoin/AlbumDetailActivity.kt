@@ -1,6 +1,7 @@
 package com.mehdi.leboncoin
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -25,7 +26,10 @@ class AlbumDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setSupportActionBar(detail_toolbar)
+        val albumId = intent?.getStringExtra(ARG_ALBUM_ID)!!.toInt()
+
+        // Show the title of the album
+        supportActionBar?.setTitle("Album $albumId")
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,13 +41,28 @@ class AlbumDetailActivity : AppCompatActivity() {
             lifecycle.addObserver(mModel)
         }
 
-        mModel.getAlbumsById(intent?.getStringExtra(ARG_ALBUM_ID)!!.toInt())
+        mModel.getAlbumsById(albumId)
 
         mModel.albums.observe(this, Observer { albums ->
             dataBinding.recyclerAlbum?.adapter = adapter
             adapter.setData(dataList = albums)
         })
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            android.R.id.home -> {
+                // This ID represents the Home or Up button. In the case of this
+                // activity, the Up button is shown. For
+                // more details, see the Navigation pattern on Android Design:
+                //
+                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     companion object {
         const val ARG_ALBUM_ID = "album_id"
