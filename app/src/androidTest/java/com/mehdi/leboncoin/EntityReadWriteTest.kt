@@ -5,13 +5,15 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider.*
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mehdi.leboncoin.dao.AlbumDao
 import com.mehdi.leboncoin.db.AlbumDatabase
 import com.mehdi.leboncoin.entities.AlbumEntity
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.*
+import kotlinx.coroutines.runBlocking
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -55,14 +57,13 @@ class AlbumDaoTest{
 
         var listAlbums2 : MutableList<AlbumEntity> = mutableListOf()
         listAlbums2.add(album1)
-        listAlbums2.add(album2)
 
         albumDao.insertAll(listAlbums)
 
         val selection = albumDao.getAlbums().blockingObserve()
 
-        assertEquals(listAlbums, selection)
-        //assertEquals(listAlbums2, selection)
+        assertThat(listAlbums, `is`(selection))
+        assertThat(listAlbums2, `is`(not(selection)))
     }
 
     @Rule
