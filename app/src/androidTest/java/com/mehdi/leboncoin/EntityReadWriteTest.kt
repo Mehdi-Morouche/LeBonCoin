@@ -35,8 +35,7 @@ class AlbumDaoTest{
     @Before
     fun init() {
         val context = getApplicationContext<Context>()
-        albumDatabase = Room.inMemoryDatabaseBuilder(context, AlbumDatabase::class.java)
-            .build()
+        albumDatabase = Room.inMemoryDatabaseBuilder(context, AlbumDatabase::class.java).build()
 
         albumDao = albumDatabase.albumDao()
     }
@@ -64,6 +63,16 @@ class AlbumDaoTest{
 
         assertThat(listAlbums, `is`(selection))
         assertThat(listAlbums2, `is`(not(selection)))
+
+        listAlbums.clear()
+        listAlbums.add(album1)
+        listAlbums.add(album2)
+
+        albumDao.insertAll(listAlbums)
+
+        val selection2 = albumDao.getAlbums().blockingObserve()
+
+        assertThat(listAlbums, `is`(selection2))
     }
 
     @Rule
