@@ -10,16 +10,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "album")
-class AlbumEntity {
+data class AlbumEntity (
     @field:SerializedName("albumId")
-    @ColumnInfo(name = "albumId") var albumId: Int? = null
+    @ColumnInfo(name = "albumId") var albumId: Int? = null,
     @PrimaryKey
     @field:SerializedName("id")
-    @ColumnInfo(name = "id") var id: Int? = null
+    @ColumnInfo(name = "id") var id: Int? = null,
     @field:SerializedName("title")
-    @ColumnInfo(name = "title") var title: String? = null
+    @ColumnInfo(name = "title") var title: String? = null,
     @field:SerializedName("url")
-    @ColumnInfo(name = "url") var url: String? = null
+    @ColumnInfo(name = "url") var url: String? = null,
     @field:SerializedName("thumbnailUrl")
     @ColumnInfo(name = "thumbnailUrl") var thumbnailUrl: String? = null
-}
+)
