@@ -47,6 +47,8 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         cpt = 0
 
+        albums.sortedBy { it.albumId }
+
         for (album in albums) {
             if (albumsSize.size == 0) {
                 albumsSize.add(album.albumId.toString())
