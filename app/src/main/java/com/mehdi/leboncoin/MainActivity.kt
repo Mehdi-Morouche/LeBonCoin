@@ -3,10 +3,11 @@ package com.mehdi.leboncoin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.mehdi.leboncoin.adapter.Adapter
 import com.mehdi.leboncoin.databinding.ActivityMainBinding
 import com.mehdi.leboncoin.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var dataBinding: ActivityMainBinding
 
-    //var adapter = Adapter()
+    var adapter = Adapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +27,10 @@ class MainActivity : AppCompatActivity() {
             lifecycle.addObserver(mModel)
         }
 
-        /*mModel.cars.observe(this, Observer { cars ->
-            dataBinding.recycler?.adapter = adapter
-            adapter.setData(dataList = cars)
-        })*/
+        dataBinding.recycler?.adapter = adapter
+
+        mModel.albums.observe(this, Observer { albums ->
+            adapter.setData(dataList = albums)
+        })
     }
 }
